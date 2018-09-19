@@ -1,0 +1,1 @@
+This is a text file to note that there's an extension.crx file in this folder.  It's not visible to the editor as it's a binary blob.

@@ -1,0 +1,55 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <h1>
+        A Dream of the Future
+      </h1>
+    </header>
+
+    <main>
+      <!-- Todo: Picture tutorial of how to install the thing. -->
+      <p class="bold">Oh hi,</p>
+      <ol>
+        <li><a href="extension.crx" download>Download this extension</a> </li>
+        <li>Open up the chrome extensions page at chrome://extensions</li>
+        <li>Drag the .crx file from your chrome downloads bar onto the extensinos page</li>
+      </ol>
+      
+      <p>
+        When you click on the extension button, it'll find and open the first link it finds on the page.
+      </p>
+    </main>
+    
+    <footer>
+      made with <a href="glitch.com">glitch</a>
+    </footer>
+
+
+
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+
+  </body>
+</html>
