@@ -1,0 +1,9 @@
+#page-scraper-highlighted {
+  background: coral;
+  opacity: 0.3;
+  position: absolute;
+}
+
+#page-scraper {
+  background: white;
+}
