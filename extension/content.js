@@ -1,38 +1,49 @@
 /*global chrome*/
 
+const injectPrettificationScript = async scriptURL => {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = chrome.extension.getURL(scriptURL);
+    (document.head || document.documentElement).appendChild(s);
+    s.onload = () => resolve(s);
+    s.onerror = reject;
+  });
+};
+
+const firstRun = async () => {
+  document.addEventListener("receiveCodeToBePrettified", e => {
+    console.log("received code to prettify");
+    const codeToPrettify = e.detail;
+    const prettifiedCode = prettier.format(codeToPrettify, {
+      parser: "babylon",
+      plugins: prettierPlugins
+    });
+
+    var event = new CustomEvent("receivePrettifiedCode", {
+      detail: prettifiedCode
+    });
+
+    document.dispatchEvent(event);
+  });
+
+  await injectPrettificationScript("script.js");
+  runPrettification();
+};
+
+const runPrettification = () => {
+  var event = new CustomEvent("startCodePrettification");
+
+  document.dispatchEvent(event);
+};
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.message === "clicked_browser_action") {
     console.log("hello prettier extension!");
-    
-    var containerDiv = $("<div>");
-
-    containerDiv.attr('id', 'page-scraper')
-    containerDiv.css({
-      position: 'fixed',
-      left: '0px',
-      bottom: '0px',
-      width: '100%',
-      height: '20vh',
-      border: '1px solid black',
-      backgroundColor: 'white'
-    });
-    containerDiv.text('hello from Lincoln and Sheridan')
-    
-    containerDiv.appendTo(document.body);
-    
-    var scriptDiv = $('<script>');
-    scriptDiv.src = 'https://unpkg.com/prettier@1.13.0/standalone.js';
-    
-    scriptDiv.appendTo(document.head);
-      
-    const setUpPrettier = async () => {
-      const prettierRequest = await fetch('https://unpkg.com/prettier@1.13.0/standalone.js');
-      const babylonRequest = await fetch('https://unpkg.com/prettier@1.13.0/parser-babylon.js');
-      const prettierJS = await prettierRequest.text()
-      const prettier = await eval(prettierJS)
-      console.log("Prettier",prettier)
+    if (!window.hasRun) {
+      window.hasRun = true;
+      firstRun();
+    } else {
+      runPrettification();
     }
-    setUpPrettier()
-
   }
 });
