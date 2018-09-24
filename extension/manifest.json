@@ -5,15 +5,19 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "browser_action": "browser_action": {
+          "default_icon": {
+            "16": "images/sparkle_16.png",
+            "64": "images/sparkle_64.png"
+          },
+        },
   "content_security_policy": "script-src 'self' https://glitch-prettier-extension.glitch.me; object-src 'self'",
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "css": ["page-scraper.css"],
       "js": [
-        "jquery-3.2.1.min.js", 
         "standalone.js",
         "parser-babylon.js",
         "parser-graphql.js",
@@ -21,8 +25,11 @@
       ]
     }
   ],
-  "browser_action": {
-    "default_icon": "frog_guiro_128.jpg"
+  "description": "Format code in Glitch (or any editor that uses CodeMirror) by clicking the extension button.",
+  "icons": {
+    "16":"images/sparkle_16.png",
+    "64":"images/sparkle_64.png",
+    "128":"images/sparkle_128.png",
   },
   "web_accessible_resources": [
     "script.js"
